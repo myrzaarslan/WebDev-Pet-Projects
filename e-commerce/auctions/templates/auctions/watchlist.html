@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Your Watchlist</h2>
+    {% for wl_listing in wl_listings %}
+        <div>
+            <hr>
+            <p><h2>{{ wl_listing.title }}</h2></p>
+            <p><img src="{{ wl_listing.imgURL }}" alt="{{ wl_listing.title }}"></p>
+            <p><h4>${{ wl_listing.current_bid }}</h4></p>
+            <a href="{% url 'listing' id=wl_listing.id %}">Learn More</a>
+            <hr>
+        </div>
+    {% endfor %}
+{% endblock %}

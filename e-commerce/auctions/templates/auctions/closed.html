@@ -1,0 +1,36 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Your Closed Listings:</h2>
+    {% if not isbidder and not iscreator %}
+        <h3>{{ message }}</h3>
+    {% endif %}
+    {% if isbidder %}
+        <h3>You won bids!</h3>
+        {% for listing in bidder_listings %}
+        <div>
+            <hr>
+            <p><h2>{{ listing.title }}</h2></p>
+            <p><img src="{{ listing.imgURL }}" alt="{{ listing.title }}"></p>
+            <p><h6>Description: {{ listing.description }}</h6></p>
+            <p><h4>${{ listing.current_bid }}</h4></p>
+            <a href="{% url 'listing' id=listing.id %}">Learn More</a>
+            <hr>
+        </div>
+        {% endfor %}
+    {% endif %}
+    {% if iscreator %}
+    <h3>Your listings are closed!</h3>
+    {% for listing in creator_listings %}
+    <div>
+        <hr>
+        <p><h2>{{ listing.title }}</h2></p>
+        <p><img src="{{ listing.imgURL }}" alt="{{ listing.title }}"></p>
+        <p><h6>Description: {{ listing.description }}</h6></p>
+        <p><h4>${{ listing.current_bid }}</h4></p>
+        <a href="{% url 'listing' id=listing.id %}">Learn More</a>
+        <hr>
+    </div>
+    {% endfor %}
+{% endif %}
+{% endblock %}

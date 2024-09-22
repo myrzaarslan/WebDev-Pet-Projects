@@ -1,0 +1,30 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    <form action="{% url 'index' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group" style="margin: 20px 0px;">
+            <label for="category">Category:</label>
+            <select id="category" name="category" class="form-control" style="margin: 20px 0px;" required>
+                {% for category in categories %}
+                    <option value="{{ category.name }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Apply Filters</button>
+    </form>
+    {% for listing in listings %}
+    <div class="card" style="margin: 20px 0px;">
+        <div class="card-body">
+            <hr>
+            <p><h2>{{ listing.title }}</h2></p>
+            <p><img src="{{ listing.imgURL }}" alt="{{ listing.title }}"></p>
+            <p><h6>Description: {{ listing.description }}</h6></p>
+            <p><h4>${{ listing.current_bid }}</h4></p>
+            <a href="{% url 'listing' id=listing.id %}">Learn More</a>
+            <hr>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

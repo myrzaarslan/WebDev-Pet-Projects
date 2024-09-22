@@ -1,0 +1,74 @@
+{% extends "unicompass_app/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="container mt-4 custom-container text-center" style="max-width: 600px;"> <!-- Narrow container -->
+    <h1>Pomodoro 🍅</h1>
+
+    <!-- Timer Window -->
+    <div id="timer-window" class="card text-center mb-4" style="margin-bottom: 30px; background-color: #ff6347;"> <!-- Red background for Pomodoro -->
+        <div class="card-header d-flex justify-content-center" style="background-color: transparent;"> <!-- Centered nav buttons -->
+            <ul class="nav nav-pills card-header-pills justify-content-center" style="gap: 15px;"> <!-- Added gap for button spacing -->
+                <li class="nav-item">
+                    <button id="pomodoro" class="nav-link">Pomodoro</button>
+                </li>
+                <li class="nav-item">
+                    <button id="shortBreak" class="nav-link">Short Break</button>
+                </li>
+                <li class="nav-item">
+                    <button id="longBreak" class="nav-link">Long Break</button>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div id="display-timer" style="font-size: 80px; font-weight: bold;">25:00</div> <!-- Larger timer display -->
+            <button id="button-timer" class="btn btn-primary mt-3">START</button> <!-- Added margin-top for spacing -->
+        </div>
+    </div>
+    
+    <!-- Task Form -->
+    <div id="task-form" class="card mb-4" style="margin-bottom: 30px;"> <!-- Added margin-bottom for spacing -->
+        <div class="card-body">
+            <h5 class="card-title">Add task</h5>
+            <input type="text" id="task-input" placeholder="What are you working on?" class="form-control">
+            <button id="add-task-button" type="button" class="btn btn-primary mt-2">Add Task</button>
+        </div>
+    </div>
+
+    <!-- Clear All Tasks Section -->
+    <div id="clear-all-tasks" class="mt-4">
+        <div id="clear-tasks-div" class="alert alert-info">
+            <span>All tasks are completed!</span>
+            <button id="clear-tasks-button" class="btn btn-warning ml-2">Clear All Tasks</button>
+        </div>
+    </div>
+    
+    <!-- Task List Section -->
+    <div id="task-list"></div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'unicompass_app/pomodoro1.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const timerWindow = document.getElementById('timer-window');
+        // Set default background color for Pomodoro (red)
+        timerWindow.style.backgroundColor = '#ff6347'; // Tomato red color for Pomodoro
+        
+        // Change background color based on selected mode
+        document.getElementById('pomodoro').addEventListener('click', function() {
+            timerWindow.style.backgroundColor = '#ff6347'; // Red for Pomodoro
+        });
+        document.getElementById('shortBreak').addEventListener('click', function() {
+            timerWindow.style.backgroundColor = '#87ceeb'; // Light blue for Short Break
+        });
+        document.getElementById('longBreak').addEventListener('click', function() {
+            timerWindow.style.backgroundColor = '#32cd32'; // Green for Long Break
+        });
+    });
+</script>
+{% endblock %}
+
+

@@ -1,0 +1,43 @@
+{% extends "unicompass_app/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="container mt-4 custom-container text-center">
+    <div class="container">
+        <h1 class="text-center">University Rankings</h1>
+        <div class="text-center mb-3">
+            <input type="text" id="searchBar" class="form-control" placeholder="Search for a university" onkeyup="instantSearch()">
+        </div>
+        <div class="text-center">
+            <button class="btn btn-dark" onclick="switchSource('topuniversities')">QS</button>
+            <button class="btn btn-dark" onclick="switchSource('timeshighereducation')">THE</button>
+        </div>
+        <br>
+        <table id="unisTable" class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Name</th>
+                    <th id="actualRanking" scope="col"></th>
+                    <th scope="col">Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data rows will be inserted here -->
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            <div id="loadingSpinner" class="spinner-border text-secondary" role="status" style="display: none;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul id="pagination" class="pagination justify-content-center"></ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'unicompass_app/uniranking.js' %}"></script>
+{% endblock %}
